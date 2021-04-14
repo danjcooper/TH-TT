@@ -1,3 +1,16 @@
 body {
-    background-color: rgb(84, 129, 168);
+  background-color: rgb(84, 129, 168);
+}
+
+#playersCard {
+  background-color: coral;
+  width: 250px;
+}
+
+#playersCard h3:hover {
+  color: brown;
+  cursor: pointer;
+}
+#playersCard img {
+  width: 250px;
 }
