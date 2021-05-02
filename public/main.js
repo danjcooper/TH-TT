@@ -1,3 +1,6 @@
+var playerOneCards 
+var playerTwoCards 
+
 async function loadDeckDataIntoMemory(inputFileLink) {
   if (inputFileLink == undefined) {
     return "Error";
@@ -37,6 +40,7 @@ async function loadDeckDataIntoMemory(inputFileLink) {
 
   //console.table(outputObject)
 
+  console.log(outputObject)
   return outputObject;
 }
 
@@ -70,7 +74,7 @@ function splitDeck(deck) {
 
 async function app() {
   // load the deck into memory
-  var deck = await loadDeckDataIntoMemory("/public/data/data.csv");
+  var deck = await loadDeckDataIntoMemory("/public/data/THdataWIP.csv");
 
   // shuffle the order of the deck so it's random
   deck = shuffleDeck(deck);
@@ -79,26 +83,63 @@ async function app() {
   playerDecks = splitDeck(deck);
 
 
-  var playerOneCards = playerDecks.playerOneDeck
-  var playerTwoCards = playerDecks.playerTwoDeck
+  playerOneCards = playerDecks.playerOneDeck
+  playerTwoCards = playerDecks.playerTwoDeck
 
-  document.getElementById('getCardInfo').addEventListener('click', (e) => {
-    document.getElementById('name').innerText = `Name: ${playerOneCards[0].name}`
-    document.getElementById('appearances').innerText = `Appearances: ${playerOneCards[0].appearences}`
-    document.getElementById('dates').innerText = `Number of dates: ${playerOneCards[0].dates}`
-    document.getElementById('workEthic').innerText = `Work Ethic: ${playerOneCards[0].workEthic}`
-    document.getElementById('playerCardImage').hidden = false;
-    document.getElementById('playerCardImage').src = playerOneCards[0].image;
-})
+  /* //TODO 
+    Now the data has been parsed & each player has a deck
+
+    This is where the gameplay will start.
+  */
+
+
+
+console.table(playerOneCards)
+console.table(playerTwoCards)
+
+loadTopCardIntoDOM()
 
 
 }
 
 app();
 
-document.getElementById('getCardInfo').addEventListener('click', (e) => {
-    document.getElementById('name').innerText = playerDecks.playerOneDeck.name
-    document.getElementById('appearances').innerText
-    document.getElementById('dates').innerText
-    document.getElementById('workEthic').innerText
-})
+// This 
+$('p').click(function () {
+  if ($(this).attr('id') == 'name') {
+    alert('here you should load up the player info.')
+    return
+  }
+  let value = $(this).attr('id')
+  console.log(value)
+
+  if (playerOneCards[0][value] > playerTwoCards[0][value]) {
+    console.log(playerOneCards[0].name, playerOneCards[0][value])
+    console.log(playerTwoCards[0].name, playerTwoCards[0][value])
+    console.log('player wins')
+  } else if (playerOneCards[0][value] == playerTwoCards[0][value]) {
+    console.log(playerOneCards[0].name, playerOneCards[0][value])
+    console.log(playerTwoCards[0].name, playerTwoCards[0][value])
+    console.log('draw')
+  } else {
+    console.log(playerOneCards[0].name, playerOneCards[0][value])
+    console.log(playerTwoCards[0].name, playerTwoCards[0][value])
+    console.log('computer wins')
+  }
+    
+  
+
+});
+
+
+function loadTopCardIntoDOM() {
+  $('#name').text(playerOneCards[0].name)
+
+  $('#dates .attribute').text(playerOneCards[0].dates)
+  $('#episodes .attribute').text(playerOneCards[0].episodes)
+  $('#workEthic .attribute').text(playerOneCards[0].workEthic)
+  $('#laziness .attribute').text(playerOneCards[0].laziness)
+  $('#whoability .attribute').text(playerOneCards[0].whoability)
+  $('#drama .attribute').text(playerOneCards[0].drama)
+}
+

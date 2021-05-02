@@ -1,27 +1,69 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="/public/style.css" />
 
     <title>Terrace House Top Trumps</title>
-</head>
-<body>
-    <h1>TH TT</h1>
-
-    <button id="getCardInfo" type="button">Get Deck Data</button>
-    
-    <div id="playersCard">
-        <img id="playerCardImage" src="" alt="" hidden draggable="false">
-        <h2 id="name" class="cardValues"></h2>
-        <h3 id="appearances" class="cardValues"></h3> 
-        <h3 id="dates" class="cardValues"></h3>
-        <h3 id="workEthic" class="cardValues"></h3>
+  </head>
+  <body>
+    <h1>Terrace Trumps</h1>
+    <div id="playerOne">
+      <div id="playerOneCard">
+        <div id="cardOneText">
+          <p id="name" class="name"></p>
+          <p class="description">tbc</p>
+          <p id="dates">Dates: <span class="attribute">0</span></p>
+          <p id="episodes">Episodes: <span class="attribute"></span></p>
+          <p id="workEthic">Work Ethic: <span class="attribute"></span></p>
+          <p id="laziness">Laziness: <span class="attribute"></span></p>
+          <p id="whoability">Who-ability: <span class="attribute"></span></p>
+          <p id="dates">Drama: <span class="attribute"></span></p>
+        </div>
+      </div>
+      <h2>Player One Cards</h2>
     </div>
-    
+    <div id="playerCom">
+      <div id="playerComCard">
+        <p>
+          <span class="name">Name</span>
+          <br />
+          <span class="description">This is the cards description</span>
+          <br />
+          Number of Episodes: <span class="attribute">80</span>
+          <br />
+          Dates: <span class="attribute">9</span>
+          <br />
+          Work Ethic: <span class="attribute">8</span>
+          <br />
+          Who-ability: <span class="attribute">1</span>
+          <br />
+          Laziness: <span class="attribute">2</span>
+          <br />
+          Drama: <span class="attribute">80</span>
+        </p>
+      </div>
+      <h2>Player One Cards</h2>
+    </div>
 
     <script src="/public/main.js"></script>
-</body>
+  </body>
 </html>
