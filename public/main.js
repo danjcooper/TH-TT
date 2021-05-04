@@ -74,7 +74,7 @@ function splitDeck(deck) {
 
 async function app() {
   // load the deck into memory
-  var deck = await loadDeckDataIntoMemory("/public/data/THdataWIP.csv");
+  var deck = await loadDeckDataIntoMemory("/public/data/test.csv");
 
   // shuffle the order of the deck so it's random
   deck = shuffleDeck(deck);
@@ -107,24 +107,33 @@ app();
 // This 
 $('p').click(function () {
   if ($(this).attr('id') == 'name') {
-    alert('here you should load up the player info.')
+    //alert('here you should load up the player info.')
+    $('.description').hide()
+    console.log('h')
     return
   }
   let value = $(this).attr('id')
-  console.log(value)
 
-  if (playerOneCards[0][value] > playerTwoCards[0][value]) {
+
+
+  if (parseInt(playerOneCards[0][value]) > parseInt(playerTwoCards[0][value])) {
+    /*
     console.log(playerOneCards[0].name, playerOneCards[0][value])
     console.log(playerTwoCards[0].name, playerTwoCards[0][value])
+    */
     console.log('player wins')
-  } else if (playerOneCards[0][value] == playerTwoCards[0][value]) {
+    updatePlayerDecks('player')
+  } else if (parseInt(playerOneCards[0][value]) < parseInt(playerTwoCards[0][value])) {
+    /*
     console.log(playerOneCards[0].name, playerOneCards[0][value])
     console.log(playerTwoCards[0].name, playerTwoCards[0][value])
-    console.log('draw')
-  } else {
-    console.log(playerOneCards[0].name, playerOneCards[0][value])
-    console.log(playerTwoCards[0].name, playerTwoCards[0][value])
+    */
     console.log('computer wins')
+    updatePlayerDecks('com')
+    
+  } else {
+    console.log('draw')
+    updatePlayerDecks('draw')
   }
     
   
@@ -141,5 +150,37 @@ function loadTopCardIntoDOM() {
   $('#laziness .attribute').text(playerOneCards[0].laziness)
   $('#whoability .attribute').text(playerOneCards[0].whoability)
   $('#drama .attribute').text(playerOneCards[0].drama)
+
+  // Update the deck sizes
+  $('#playerOneDeckSize').text(playerOneCards.length + ' cards')
+  $('#playerTwoDeckSize').text(playerTwoCards.length + ' cards')
 }
 
+function updatePlayerDecks(winner) {
+  if (winner == 'player') {
+    playerOneCards.push(playerTwoCards[0]) // add the players card to the bottom of your stack
+    playerTwoCards.shift() // remove the first element from the losing list
+    playerOneCards.push(playerOneCards[0]) // put the top card to the bottom of the list
+    playerOneCards.shift() // remove the first element from the losing list aka the card that's now at the bottom
+    console.log(playerOneCards,playerTwoCards)
+    loadTopCardIntoDOM()
+  } else if (winner == 'com') {
+    playerTwoCards.push(playerOneCards[0]) // add the players card to the bottom of your stack
+    playerOneCards.shift() // remove the first element from the losing list
+    playerTwoCards.push(playerTwoCards[0]) // put the top card to the bottom of the list
+    playerTwoCards.shift() // remove the first element from the losing list aka the card that's now at the bottom
+    console.log(playerOneCards,playerTwoCards)
+    loadTopCardIntoDOM()
+  } else {
+    playerOneCards.push(playerTwoCards[0]) // add the players card to the bottom of your stack
+    playerOneCards.shift() // remove the first element from the losing list
+    playerTwoCards.push(playerTwoCards[0]) // add the players card to the bottom of your stack
+    playerTwoCards.shift() // remove the first element from the losing list
+    loadTopCardIntoDOM()
+  }
+}
+
+$('button').click(function () {
+  console.log('ji')
+  app()
+})
